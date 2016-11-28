@@ -6,6 +6,33 @@
     </head>
     <body>
 
-    <script src='node_modules/angular/angular.js'></script>
+        <header>
+            <h1>Shopular Inventory</h1>
+        </header>
+
+        <main ng-controller='inventoryController as stock'>
+            <table>
+                <tr>
+                    <th>Item</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Color</th>
+                </tr>
+                <tr ng-repeat='item in stock.inventory'>
+                    <td>{{ item.name }}</td>
+                    <td>{{ (item.price - item.discount) * stock.tax | currency }}<img ng-show='item.discount > 0' src='https://tiy-learn-content.s3.amazonaws.com/98350f05-sale_2.png'></td>
+                    <td>{{ item.quantity }}</td>
+                    <td>{{ item.color }}</td>
+                </tr>
+            </table>
+        </main>
+
+        <footer>
+            <h2>&copy Shopular Technoliges</h2>
+        </footer>
+
+        <script src='node_modules/angular/angular.js'></script>
+        <script src='js/shop.module.js'></script>
+        <script src='js/inventory.controller.js'></script>
     </body>
 </html>
