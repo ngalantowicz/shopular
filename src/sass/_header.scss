@@ -1,0 +1,26 @@
+h1 {
+    text-align: center;
+    font-size: $headFontSize;
+    margin-bottom: $headMargBot;
+}
+nav {
+    @include blockCenter(0, 30%);
+    button {
+        display: block;
+        float: left;
+        @include blockCenter(0, 50%);
+        margin-bottom: $buttMrgBot;
+        font-size: $buttFontSize;
+        text-align: center;
+        &:nth-child(even){
+            background-image: url('https://flagspot.net/images/g/gb.gif');
+            background-size: auto;
+            opacity: 0.5;
+        }
+        &:nth-child(odd){
+            background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/US_flag_48_stars.svg/220px-US_flag_48_stars.svg.png');
+            background-size: auto;
+            opacity: 0.5;
+        }
+    }
+}

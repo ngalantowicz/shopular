@@ -3,36 +3,43 @@
     <head>
         <meta charset="utf-8">
         <title>Shopular</title>
+
+        <link href='css/styles.css' type='text/css' rel='stylesheet'>
+
     </head>
     <body ng-controller='inventoryController as stock'>
 
         <header>
             <h1>Shopular Inventory</h1>
             <nav>
-                <button>US</button>
+                <button ng-click='stock.customer()'>US</button>
                 <button ng-click='stock.customer()'>UK</button>
             </nav>
         </header>
 
         <main>
             <table>
-                <tr>
-                    <th>Item</th>
-                    <th>Price</th>
-                    <th>Quantity</th>
-                    <th>Color</th>
-                </tr>
-                <tr ng-repeat='item in stock.inventory'>
-                    <td>{{ stock.getName(item) }}</td>
-                    <td>{{ stock.getPrice(item) | currency }}<img ng-show='item.discount > 0' src='https://tiy-learn-content.s3.amazonaws.com/98350f05-sale_2.png'></td>
-                    <td>{{ item.quantity }}</td>
-                    <td>{{ item.color }}</td>
-                </tr>
+                <thead>
+                    <tr>
+                        <th>Item</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Color</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat='item in stock.inventory'>
+                        <td>{{ stock.getName(item) }}</td>
+                        <td>{{ stock.getPrice(item) | currency }}<img ng-show='item.discount > 0' src='https://tiy-learn-content.s3.amazonaws.com/98350f05-sale_2.png'></td>
+                        <td>{{ item.quantity }}</td>
+                        <td>{{ item.color }}</td>
+                    </tr>
+                </tbody>
             </table>
         </main>
 
         <footer>
-            <h2>&copy Shopular Technoliges</h2>
+            <h2>&copy Shopular Technologies</h2>
         </footer>
 
         <script src='js/app.js'></script>

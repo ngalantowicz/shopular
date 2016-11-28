@@ -1,0 +1,4 @@
+@mixin blockCenter($mrg, $wdth) {
+    margin: $mrg auto;
+    width: $wdth
+}

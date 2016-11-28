@@ -1,0 +1,12 @@
+table {
+    @include blockCenter (5%, 50%);
+    border-collapse: collapse;
+    background-color: $TbackColor;
+}
+th {
+    border: $Tborder;
+    box-sizing: border-box;
+}
+td {
+    border: $Tborder;
+}

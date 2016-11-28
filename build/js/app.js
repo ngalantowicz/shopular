@@ -32421,20 +32421,15 @@ $provide.value("$locale", {
                 } else {
                     this.uk = true;
                 }
-                console.log('flipping to', this.uk);
             };
 
             this.getPrice = function getPrice(item) {
-                console.log('start price', item.price, this.uk);
                     var price;
                     if (this.uk === true) {
                         price = ((item.price - item.discount) * this.tax) * 1.5;
-                        console.log('uk', item.price);
                         return price;
                     } else {
                         price = (item.price - item.discount) * this.tax;
-                        console.log(this.tax);
-                        console.log('calac', price);
                         return price;
                     }
             };
@@ -32443,7 +32438,6 @@ $provide.value("$locale", {
                 if (this.uk === true) {
                     if (item.name === 'waste basket') {
                         item.name = 'rubbish bin';
-                        console.log('using uk version');
                         return item.name;
                     }
                 }
