@@ -7,7 +7,7 @@
         function inventoryController() {
 
             this.tax = 0.0575;
-
+            this.uk = false;
 
             this.inventory = [
                               { "id": 2957, "name": "widget", "price": 32, "quantity": 203, "color": "red", "discount": 31 },
@@ -23,6 +23,41 @@
                               { "id": 533, "name": "eggs", "price": 5, "quantity": 12, "color": "brown", "discount": 1 },
                               { "id": 683, "name": "pillow", "price": 27, "quantity": 10, "color": "black", "discount": 12 }
                             ];
+
+            this.customer = function customer(){
+                if (this.uk === true) {
+                    this.uk = false;
+                } else {
+                    this.uk = true;
+                }
+                console.log('flipping to', this.uk);
+            };
+
+            this.getPrice = function getPrice(item) {
+                console.log('start price', item.price, this.uk);
+                    var price;
+                    if (this.uk === true) {
+                        price = ((item.price - item.discount) * this.tax) * 1.5;
+                        console.log('uk', item.price);
+                        return price;
+                    } else {
+                        price = (item.price - item.discount) * this.tax;
+                        console.log(this.tax);
+                        console.log('calac', price);
+                        return price;
+                    }
+            };
+
+            this.getName = function getName(item) {
+                if (this.uk === true) {
+                    if (item.name === 'waste basket') {
+                        item.name = 'rubbish bin';
+                        console.log('using uk version');
+                        return item.name;
+                    }
+                }
+                return item.name;
+            };
 
         }
 

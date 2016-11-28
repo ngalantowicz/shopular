@@ -4,13 +4,17 @@
         <meta charset="utf-8">
         <title>Shopular</title>
     </head>
-    <body>
+    <body ng-controller='inventoryController as stock'>
 
         <header>
             <h1>Shopular Inventory</h1>
+            <nav>
+                <button>US</button>
+                <button ng-click='stock.customer()'>UK</button>
+            </nav>
         </header>
 
-        <main ng-controller='inventoryController as stock'>
+        <main>
             <table>
                 <tr>
                     <th>Item</th>
@@ -19,8 +23,8 @@
                     <th>Color</th>
                 </tr>
                 <tr ng-repeat='item in stock.inventory'>
-                    <td>{{ item.name }}</td>
-                    <td>{{ (item.price - item.discount) * stock.tax | currency }}<img ng-show='item.discount > 0' src='https://tiy-learn-content.s3.amazonaws.com/98350f05-sale_2.png'></td>
+                    <td>{{ stock.getName(item) }}</td>
+                    <td>{{ stock.getPrice(item) | currency }}<img ng-show='item.discount > 0' src='https://tiy-learn-content.s3.amazonaws.com/98350f05-sale_2.png'></td>
                     <td>{{ item.quantity }}</td>
                     <td>{{ item.color }}</td>
                 </tr>
