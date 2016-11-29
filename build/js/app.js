@@ -32415,11 +32415,13 @@ $provide.value("$locale", {
                               { "id": 683, "name": "pillow", "price": 27, "quantity": 10, "color": "black", "discount": 12 }
                             ];
 
-            this.customer = function customer(){
-                if (this.uk === true) {
-                    this.uk = false;
-                } else {
+            this.customer = function customer(boolean){
+                if (boolean === true) {
                     this.uk = true;
+                    //document.querySelector('table').addClass('uk');
+                } else {
+                    this.uk = false;
+                    //document.querySelector('table.uk').removeClass('uk');
                 }
             };
 

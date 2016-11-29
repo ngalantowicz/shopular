@@ -1,12 +1,34 @@
 table {
     @include blockCenter (5%, 50%);
     border-collapse: collapse;
-    background-color: $TbackColor;
+    position: relative;
+    &::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/US_flag_48_stars.svg/220px-US_flag_48_stars.svg.png');
+        opacity: 0.2;
+    }
+    &.uk::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: url('https://flagspot.net/images/g/gb.gif');
+        opacity: 0.2;
+    }
 }
 th {
     border: $Tborder;
     box-sizing: border-box;
+    font-weight: bold;
 }
 td {
     border: $Tborder;
+    font-weight: bold;
 }

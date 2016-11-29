@@ -11,16 +11,35 @@ nav {
         @include blockCenter(0, 50%);
         margin-bottom: $buttMrgBot;
         font-size: $buttFontSize;
+        font-weight: bolder;
+        color: #000000;
         text-align: center;
+        position: relative;
         &:nth-child(even){
-            background-image: url('https://flagspot.net/images/g/gb.gif');
-            background-size: auto;
-            opacity: 0.5;
+            &::after {
+                content: '';
+                position: absolute;
+                clear: both;
+                top: 0;
+                left: 0;
+                height: 100%;
+                width: 100%;
+                background-image: url('https://flagspot.net/images/g/gb.gif');
+                opacity: 0.4;
+            }
         }
         &:nth-child(odd){
-            background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/US_flag_48_stars.svg/220px-US_flag_48_stars.svg.png');
-            background-size: auto;
-            opacity: 0.5;
+            &::after {
+                content: '';
+                position: absolute;
+                clear: both;
+                top: 0;
+                left: 0;
+                height: 100%;
+                width: 100%;
+                background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/US_flag_48_stars.svg/220px-US_flag_48_stars.svg.png');
+                opacity: 0.3;
+            }
         }
     }
 }
