@@ -12,25 +12,26 @@
         <header>
             <h1>Shopular Inventory</h1>
             <nav>
-                <button ng-click='stock.customer(false)'>US</button>
-                <button ng-click='stock.customer(true)'>UK</button>
+                <button ng-click='stock.customer(false); uk=""'>US</button>
+                <button ng-click='stock.customer(true); uk="uk"'>UK</button>
             </nav>
         </header>
 
         <main>
-            <table>
+            <table ng-class='uk'>
                 <thead>
                     <tr>
                         <th>Item</th>
                         <th>Price</th>
                         <th>Quantity</th>
-                        <th>Color</th>
+                        <th ng-hide='stock.uk === true'>Color</th>
+                        <th ng-hide='!stock.uk'>Colour</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr ng-repeat='item in stock.inventory'>
                         <td>{{ stock.getName(item) }}</td>
-                        <td>{{ stock.getPrice(item) | currency }}<img ng-show='item.discount > 0' src='https://tiy-learn-content.s3.amazonaws.com/98350f05-sale_2.png'></td>
+                        <td>{{ stock.getPrice(item) | currency: stock.currency }}<img ng-show='item.discount > 0' src='https://tiy-learn-content.s3.amazonaws.com/98350f05-sale_2.png'></td>
                         <td>{{ item.quantity }}</td>
                         <td>{{ item.color }}</td>
                     </tr>

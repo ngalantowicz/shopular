@@ -32399,6 +32399,7 @@ $provide.value("$locale", {
 
             this.tax = 0.0575;
             this.uk = false;
+            this.currency = '$';
 
             this.inventory = [
                               { "id": 2957, "name": "widget", "price": 32, "quantity": 203, "color": "red", "discount": 31 },
@@ -32418,10 +32419,10 @@ $provide.value("$locale", {
             this.customer = function customer(boolean){
                 if (boolean === true) {
                     this.uk = true;
-                    //document.querySelector('table').addClass('uk');
+                    this.currency = 'UBP $';
                 } else {
                     this.uk = false;
-                    //document.querySelector('table.uk').removeClass('uk');
+                    this.currency = 'USD $';
                 }
             };
 
