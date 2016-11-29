@@ -6,7 +6,6 @@ h1 {
 nav {
     @include blockCenter(0, 30%);
     button {
-        display: block;
         float: left;
         @include blockCenter(0, 50%);
         margin-bottom: $buttMrgBot;
@@ -25,7 +24,7 @@ nav {
                 height: 100%;
                 width: 100%;
                 background-image: url('https://flagspot.net/images/g/gb.gif');
-                opacity: 0.4;
+                opacity: 0.2;
             }
         }
         &:nth-child(odd){
@@ -38,7 +37,7 @@ nav {
                 height: 100%;
                 width: 100%;
                 background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/US_flag_48_stars.svg/220px-US_flag_48_stars.svg.png');
-                opacity: 0.3;
+                opacity: 0.2;
             }
         }
     }

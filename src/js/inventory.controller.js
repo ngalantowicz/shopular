@@ -9,6 +9,7 @@
             this.tax = 0.0575;
             this.uk = false;
             this.currency = '$';
+            this.newItem = {};
 
             this.inventory = [
                               { "id": 2957, "name": "widget", "price": 32, "quantity": 203, "color": "red", "discount": 31 },
@@ -37,11 +38,13 @@
 
             this.getPrice = function getPrice(item) {
                     var price;
+                    var base = (item.price - item.discount);
+                    var tax = (item.price - item.discount) * this.tax;
                     if (this.uk === true) {
-                        price = ((item.price - item.discount) * this.tax) * 1.5;
+                        price = (base + tax) * 1.5;
                         return price;
                     } else {
-                        price = (item.price - item.discount) * this.tax;
+                        price = (base + tax);
                         return price;
                     }
             };
@@ -54,6 +57,19 @@
                     }
                 }
                 return item.name;
+            };
+
+            this.itemAdd = function itemAdd(item) {
+                console.log(item);
+                console.log(item.price);
+                this.inventory.push({
+                    id: Math.ceil(Math.random()*1000),
+                    name: item.name,
+                    price: Number(item.price),
+                    quantity: item.quantity,
+                    color: item.color,
+                    discount: Number(item.discount)
+                });
             };
 
         }

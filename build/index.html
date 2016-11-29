@@ -6,6 +6,15 @@
 
         <link href='css/styles.css' type='text/css' rel='stylesheet'>
 
+        <style>
+            .ng-invalid.ng-touched {
+                border: 1px solid red;
+            }
+            /*.ng-invalid-required {
+                border: 1px solid red;
+            }*/
+            </style>
+
     </head>
     <body ng-controller='inventoryController as stock'>
 
@@ -15,9 +24,11 @@
                 <button ng-click='stock.customer(false); uk=""'>US</button>
                 <button ng-click='stock.customer(true); uk="uk"'>UK</button>
             </nav>
+            <button ng-hide='form' ng-click='form = true'>Add New Item</button>
         </header>
 
-        <main>
+
+        <main ng-hide='form'>
             <table ng-class='uk'>
                 <thead>
                     <tr>
@@ -38,6 +49,24 @@
                 </tbody>
             </table>
         </main>
+
+        <form novalidate name='addItem' ng-show='form' ng-submit='addItem.$valid && stock.itemAdd(stock.newItem; (form = false)'>
+            <h3>Add New Item</h3>
+            <p ng-show='addItem.item.$touched && !addItem.item.$valid'>Need an Item</p>
+            <p ng-show='addItem.price.$touched && !addItem.price.$valid'>Need a Price</p>
+            <p ng-show='addItem.quanity.$touched && !addItem.quanity.$valid'>Need a Quantity</p>
+            <p ng-show='addItem.color.$touched && !addItem.color.$valid'>Need a Color</p>
+            <p ng-show='addItem.discount.$touched && !addItem.discount.$valid'>Need a Discount</p>
+
+
+
+            <input type='text' name='item new' placeholder='Item' required ng-model='stock.newItem.name'>
+            <input type='text' name='price new' placeholder='Price' required ng-model='stock.newItem.price'>
+            <input type='text' name='quanity new' placeholder='Quanity' required ng-model='stock.newItem.quantity'>
+            <input type='text' name='color new' placeholder='Color' required ng-model='stock.newItem.color'>
+            <input type='text' name='discount new' placeholder='Discount' required ng-model='stock.newItem.discount'>
+            <input type='submit'>
+        </form>
 
         <footer>
             <h2>&copy Shopular Technologies</h2>
