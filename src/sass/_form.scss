@@ -1,6 +1,16 @@
+form {
+    display: block;
+    @include blockCenter(10%, 60%);
+    margin-top: 3%;
+    h3 {
+        text-align: center;
+    }
+    input {
+        display: block;
+        @include blockCenter(0, 30%);
+    }
+}
+
 .ng-invalid.ng-touched {
     border: 1px solid red;
 }
-// .ng-empty.ng-valid-minlength {
-//     border: 1px solid red;
-// }

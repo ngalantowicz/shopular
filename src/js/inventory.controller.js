@@ -11,7 +11,7 @@
 
             this.tax = 0.0575;
             this.uk = false;
-            this.currency = '$';
+            this.currency = 'USD $';
             this.newItem = {};
             this.formShow = false;
             this.sortBy = 'price';
@@ -68,7 +68,7 @@
                     var price;
                     var base = (item.price - item.discount);
                     var tax = (item.price - item.discount) * this.tax;
-                    if (this.uk === true) {
+                    if (this.uk) {
                         price = (base + tax) * 1.5;
                     } else {
                         price = (base + tax);
@@ -82,16 +82,14 @@
              * @return {String}      correct item name
              */
             this.getName = function getName(item) {
-                var newItem = null;
-                if (this.uk === true) {
+                var ukName = 'rubbish bin';
+                if (this.uk) {
                     if (item.name === 'waste basket') {
-                        newItem = 'rubbish bin';
+                        return ukName;
+                        //Quick Note: If i dont change the inventory data, my alphabetic sort order will not be correct...
                     }
-                } else if (newItem !== null) {
-                return newItem;
-            } else {
+                }
                 return item.name;
-            }
             };
 
             /**
@@ -114,14 +112,11 @@
              * @param  {String} sort paramater for data sort
              */
             this.sortOrder = function sortOrder(sort){
-                console.log('imin');
-                this.sortBy = sort;
-                if (this.reverse) {
-                    this.reverse = false;
-                } else {
-                    this.reverse = true;
+                if (this.sortBy === sort) {
+                    this.sortBy = '-' + sort;
+                }   else {
+                    this.sortBy = sort;
                 }
-
             };
 
         }

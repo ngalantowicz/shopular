@@ -19,23 +19,36 @@ nav {
     nav button:nth-child(even)::after {
       content: '';
       position: absolute;
-      clear: both;
       top: 0;
       left: 0;
       height: 100%;
       width: 100%;
       background-image: url("https://flagspot.net/images/g/gb.gif");
-      opacity: 0.2; }
+      opacity: 0.2;
+      margin-bottom: 5%; }
     nav button:nth-child(odd)::after {
       content: '';
       position: absolute;
-      clear: both;
       top: 0;
       left: 0;
       height: 100%;
       width: 100%;
       background-image: url("https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/US_flag_48_stars.svg/220px-US_flag_48_stars.svg.png");
-      opacity: 0.2; }
+      opacity: 0.2;
+      margin-bottom: 5%; }
+
+.new-item {
+  display: block;
+  margin: 10% auto;
+  width: 15%;
+  border: 1px solid black;
+  text-align: center;
+  padding: 1%;
+  margin-bottom: 5%; }
+  .new-item:hover {
+    color: #ffffff;
+    border: 1px solid white;
+    background-color: #000000; }
 
 table {
   margin: 5% auto;
@@ -71,6 +84,18 @@ th {
 td {
   border: 2px solid #000000;
   font-weight: bold; }
+
+form {
+  display: block;
+  margin: 10% auto;
+  width: 60%;
+  margin-top: 3%; }
+  form h3 {
+    text-align: center; }
+  form input {
+    display: block;
+    margin: 0 auto;
+    width: 30%; }
 
 .ng-invalid.ng-touched {
   border: 1px solid red; }

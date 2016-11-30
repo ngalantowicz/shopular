@@ -18,27 +18,40 @@ nav {
             &::after {
                 content: '';
                 position: absolute;
-                clear: both;
                 top: 0;
                 left: 0;
                 height: 100%;
                 width: 100%;
                 background-image: url('https://flagspot.net/images/g/gb.gif');
                 opacity: 0.2;
+                margin-bottom: 5%;
             }
         }
         &:nth-child(odd){
             &::after {
                 content: '';
                 position: absolute;
-                clear: both;
                 top: 0;
                 left: 0;
                 height: 100%;
                 width: 100%;
                 background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/US_flag_48_stars.svg/220px-US_flag_48_stars.svg.png');
                 opacity: 0.2;
+                margin-bottom: 5%;
             }
         }
+    }
+}
+.new-item {
+    display: block;
+    @include blockCenter(10%, 15%);
+    border: 1px solid black;
+    text-align: center;
+    padding: 1%;
+    margin-bottom: 5%;
+    &:hover {
+        color: #ffffff;
+        border: 1px solid white;
+        background-color: #000000;
     }
 }

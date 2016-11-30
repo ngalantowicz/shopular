@@ -15,7 +15,7 @@
                 <button ng-click='stock.customer(false); uk=""'>US</button>
                 <button ng-click='stock.customer(true); uk="uk"'>UK</button>
             </nav>
-            <button ng-click='stock.showForm(true)'>Add New Item</button>
+            <p class='new-item' ng-click='stock.showForm(true)'>Add New Item</p>
         </header>
 
 
@@ -31,11 +31,11 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat='item in stock.inventory | orderBy:stock.sortBy:reverse'>
-                        <td ng-class='{reverse: reverse}'>{{ stock.getName(item) }}</td>
-                        <td ng-class='{reverse: reverse}'>{{ stock.getPrice(item) | currency: stock.currency }}<img ng-show='item.discount > 0' src='https://tiy-learn-content.s3.amazonaws.com/98350f05-sale_2.png'></td>
-                        <td ng-class='{reverse: reverse}'>{{ item.quantity }}</td>
-                        <td ng-class='{reverse: reverse}'>{{ item.color }}</td>
+                    <tr ng-repeat='item in stock.inventory | orderBy:stock.sortBy'>
+                        <td>{{ stock.getName(item) }}</td>
+                        <td>{{ stock.getPrice(item) | currency: stock.currency }}<img ng-show='item.discount > 0' src='https://tiy-learn-content.s3.amazonaws.com/98350f05-sale_2.png'></td>
+                        <td>{{ item.quantity }}</td>
+                        <td>{{ item.color }}</td>
                     </tr>
                 </tbody>
             </table>
@@ -60,7 +60,7 @@
         </form>
 
         <footer>
-            <h2>&copy Shopular Technologies</h2>
+            <h2>&copy; Shopular Technologies</h2>
         </footer>
 
         <script src='js/app.js'></script>
