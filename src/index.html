@@ -24,15 +24,15 @@
                 <button ng-click='stock.customer(false); uk=""'>US</button>
                 <button ng-click='stock.customer(true); uk="uk"'>UK</button>
             </nav>
-            <button ng-hide='form' ng-click='form = true'>Add New Item</button>
+            <button ng-click='stock.showForm(true)'>Add New Item</button>
         </header>
 
 
-        <main ng-hide='form'>
+        <main ng-hide='stock.formShow'>
             <table ng-class='uk'>
                 <thead>
                     <tr>
-                        <th>Item</th>
+                        <th ng-click='orderBy("names")'>Item</th>
                         <th>Price</th>
                         <th>Quantity</th>
                         <th ng-hide='stock.uk === true'>Color</th>
@@ -40,8 +40,8 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat='item in stock.inventory'>
-                        <td>{{ stock.getName(item) }}</td>
+                    <tr ng-repeat='item in stock.inventory | orderBy:"price"'>
+                        <td >{{ stock.getName(item) }}</td>
                         <td>{{ stock.getPrice(item) | currency: stock.currency }}<img ng-show='item.discount > 0' src='https://tiy-learn-content.s3.amazonaws.com/98350f05-sale_2.png'></td>
                         <td>{{ item.quantity }}</td>
                         <td>{{ item.color }}</td>
@@ -50,7 +50,7 @@
             </table>
         </main>
 
-        <form novalidate name='addItem' ng-show='form' ng-submit='addItem.$valid && stock.itemAdd(stock.newItem; (form = false)'>
+        <form novalidate name='addItem' ng-hide='!stock.formShow' ng-submit='addItem.$valid && !stock.itemAdd(stock.newItem) && stock.showForm(false)'>
             <h3>Add New Item</h3>
             <p ng-show='addItem.item.$touched && !addItem.item.$valid'>Need an Item</p>
             <p ng-show='addItem.price.$touched && !addItem.price.$valid'>Need a Price</p>
@@ -60,11 +60,11 @@
 
 
 
-            <input type='text' name='item new' placeholder='Item' required ng-model='stock.newItem.name'>
-            <input type='text' name='price new' placeholder='Price' required ng-model='stock.newItem.price'>
-            <input type='text' name='quanity new' placeholder='Quanity' required ng-model='stock.newItem.quantity'>
-            <input type='text' name='color new' placeholder='Color' required ng-model='stock.newItem.color'>
-            <input type='text' name='discount new' placeholder='Discount' required ng-model='stock.newItem.discount'>
+            <input type='text' name='item' placeholder='Item' required ng-model='stock.newItem.name'>
+            <input type='text' name='price' placeholder='Price' required ng-model='stock.newItem.price'>
+            <input type='text' name='quanity' placeholder='Quanity' required ng-model='stock.newItem.quantity'>
+            <input type='text' name='color' placeholder='Color' required ng-model='stock.newItem.color'>
+            <input type='text' name='discount' placeholder='Discount' required ng-model='stock.newItem.discount'>
             <input type='submit'>
         </form>
 

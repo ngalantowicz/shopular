@@ -32401,6 +32401,9 @@ $provide.value("$locale", {
             this.uk = false;
             this.currency = '$';
             this.newItem = {};
+            this.formShow = false;
+            this.sortName = 'name';
+            this.sortQuantity = 'quantity';
 
             this.inventory = [
                               { "id": 2957, "name": "widget", "price": 32, "quantity": 203, "color": "red", "discount": 31 },
@@ -32416,6 +32419,15 @@ $provide.value("$locale", {
                               { "id": 533, "name": "eggs", "price": 5, "quantity": 12, "color": "brown", "discount": 1 },
                               { "id": 683, "name": "pillow", "price": 27, "quantity": 10, "color": "black", "discount": 12 }
                             ];
+
+
+            this.showForm = function showForm(boolean){
+                if (boolean === true) {
+                    this.formShow = true;
+                } else {
+                    this.formShow = false;
+                }
+            };
 
             this.customer = function customer(boolean){
                 if (boolean === true) {
@@ -32451,8 +32463,6 @@ $provide.value("$locale", {
             };
 
             this.itemAdd = function itemAdd(item) {
-                console.log(item);
-                console.log(item.price);
                 this.inventory.push({
                     id: Math.ceil(Math.random()*1000),
                     name: item.name,
