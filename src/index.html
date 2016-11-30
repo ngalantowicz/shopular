@@ -6,15 +6,6 @@
 
         <link href='css/styles.css' type='text/css' rel='stylesheet'>
 
-        <style>
-            .ng-invalid.ng-touched {
-                border: 1px solid red;
-            }
-            .ng-empty.ng-valid-minlength {
-                border: 1px solid red;
-            }
-            </style>
-
     </head>
     <body ng-controller='inventoryController as stock'>
 
@@ -32,19 +23,19 @@
             <table ng-class='uk'>
                 <thead>
                     <tr>
-                        <th ng-click='orderBy("names")'>Item</th>
-                        <th>Price</th>
-                        <th>Quantity</th>
-                        <th ng-hide='stock.uk === true'>Color</th>
-                        <th ng-hide='!stock.uk'>Colour</th>
+                        <th ng-click='stock.sortOrder("name")'>Item</th>
+                        <th ng-click='stock.sortOrder("price")'>Price</th>
+                        <th ng-click='stock.sortOrder("quantity")'>Quantity</th>
+                        <th ng-click='stock.sortOrder("color")' ng-hide='stock.uk === true'>Color</th>
+                        <th ng-click='stock.sortOrder("color")' ng-hide='!stock.uk'>Colour</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat='item in stock.inventory | orderBy:"price"'>
-                        <td >{{ stock.getName(item) }}</td>
-                        <td>{{ stock.getPrice(item) | currency: stock.currency }}<img ng-show='item.discount > 0' src='https://tiy-learn-content.s3.amazonaws.com/98350f05-sale_2.png'></td>
-                        <td>{{ item.quantity }}</td>
-                        <td>{{ item.color }}</td>
+                    <tr ng-repeat='item in stock.inventory | orderBy:stock.sortBy:reverse'>
+                        <td ng-class='{reverse: reverse}'>{{ stock.getName(item) }}</td>
+                        <td ng-class='{reverse: reverse}'>{{ stock.getPrice(item) | currency: stock.currency }}<img ng-show='item.discount > 0' src='https://tiy-learn-content.s3.amazonaws.com/98350f05-sale_2.png'></td>
+                        <td ng-class='{reverse: reverse}'>{{ item.quantity }}</td>
+                        <td ng-class='{reverse: reverse}'>{{ item.color }}</td>
                     </tr>
                 </tbody>
             </table>

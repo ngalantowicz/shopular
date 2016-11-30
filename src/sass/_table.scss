@@ -11,6 +11,7 @@ table {
         height: 100%;
         background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/US_flag_48_stars.svg/220px-US_flag_48_stars.svg.png');
         opacity: 0.2;
+        z-index: -1;
     }
     &.uk::after {
         content: '';
@@ -21,6 +22,7 @@ table {
         height: 100%;
         background-image: url('https://flagspot.net/images/g/gb.gif');
         opacity: 0.2;
+        z-index: -1;
     }
 }
 th {

@@ -32405,8 +32405,8 @@ $provide.value("$locale", {
             this.currency = '$';
             this.newItem = {};
             this.formShow = false;
-            this.sortName = 'name';
-            this.sortQuantity = 'quantity';
+            this.sortBy = 'price';
+            this.reverse = false;
 
             this.inventory = [
                               { "id": 2957, "name": "widget", "price": 32, "quantity": 203, "color": "red", "discount": 31 },
@@ -32461,11 +32461,10 @@ $provide.value("$locale", {
                     var tax = (item.price - item.discount) * this.tax;
                     if (this.uk === true) {
                         price = (base + tax) * 1.5;
-                        return price;
                     } else {
                         price = (base + tax);
-                        return price;
                     }
+                    return price;
             };
 
             /**
@@ -32474,13 +32473,16 @@ $provide.value("$locale", {
              * @return {String}      correct item name
              */
             this.getName = function getName(item) {
+                var newItem = null;
                 if (this.uk === true) {
                     if (item.name === 'waste basket') {
-                        item.name = 'rubbish bin';
-                        return item.name;
+                        newItem = 'rubbish bin';
                     }
-                }
+                } else if (newItem !== null) {
+                return newItem;
+            } else {
                 return item.name;
+            }
             };
 
             /**
@@ -32496,6 +32498,22 @@ $provide.value("$locale", {
                     color: item.color,
                     discount: Number(item.discount)
                 });
+            };
+
+            /**
+             * [sortOrder description]
+             * @param  {[type]} sort [description]
+             * @return {[type]}      [description]
+             */
+            this.sortOrder = function sortOrder(sort){
+                console.log('imin');
+                this.sortBy = sort;
+                if (this.reverse) {
+                    this.reverse = false;
+                } else {
+                    this.reverse = true;
+                }
+
             };
 
         }
