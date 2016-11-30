@@ -9,6 +9,9 @@ form {
         display: block;
         @include blockCenter(0, 30%);
     }
+    p {
+        text-align: center;
+    }
 }
 
 .ng-invalid.ng-touched {

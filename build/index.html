@@ -44,7 +44,7 @@
         <form novalidate name='addItem' ng-hide='!stock.formShow' ng-submit='addItem.$valid && !stock.itemAdd(stock.newItem) && stock.showForm(false)'>
             <h3>Add New Item</h3>
             <p ng-show='addItem.item.$touched && !addItem.item.$valid'>Need an Item</p>
-            <p ng-show='addItem.price.$touched && !addItem.price.$valid'>Need a Price</p>
+            <p ng-show='addItem.price.$touched && !addItem.price.$valid'>Need a Number</p>
             <p ng-show='addItem.quanity.$touched && !addItem.quanity.$valid'>Need a Quantity</p>
             <p ng-show='addItem.color.$touched && !addItem.color.$valid'>Need a Color</p>
             <p ng-show='addItem.discount.$touched && !addItem.discount.$valid'>Need a Discount</p>

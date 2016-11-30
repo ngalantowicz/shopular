@@ -32427,6 +32427,7 @@ $provide.value("$locale", {
             /**
              * Switch for form and table views
              * @param  {Boolean} boolean sets switch to true or false
+             * @return {void}
              */
             this.showForm = function showForm(boolean){
                 if (boolean === true) {
@@ -32438,7 +32439,8 @@ $provide.value("$locale", {
 
             /**
              * Switch for uk or usa table view
-             * @param  {Boolean} boolean sets switch to true or fals
+             * @param  {Boolean} boolean sets switch to true or false
+             * @return {void}
              */
             this.customer = function customer(boolean){
                 if (boolean) {
@@ -32486,21 +32488,37 @@ $provide.value("$locale", {
             /**
              * Creates new item in inventory data array
              * @param  {Object} item new stock in inventory
+             * @return {void}
              */
             this.itemAdd = function itemAdd(item) {
+                item.price = Number(item.price);
+                item.discount = Number(item.discount);
+                item.quantity = Number(item.quantity);
+
+                if (typeof(item.price) !== 'number' || !item.price) {
+                    item.price = 0;
+                }
+                if (typeof(item.discount) !== 'number' || !item.discount) {
+                    item.discount = 0;
+                }
+                if (typeof(item.quantity) !== 'number' || !item.quantity) {
+                    item.quantity = 0;
+                }
                 this.inventory.push({
                     id: Math.ceil(Math.random()*1000),
                     name: item.name,
-                    price: Number(item.price),
+                    price: (item.price),
                     quantity: item.quantity,
                     color: item.color,
-                    discount: Number(item.discount)
+                    discount: (item.discount)
                 });
+                this.newItem = {};
             };
 
             /**
              * sets paramater for data table sort
              * @param  {String} sort paramater for data sort
+             * @return {void}
              */
             this.sortOrder = function sortOrder(sort){
                 if (this.sortBy === sort) {

@@ -96,6 +96,8 @@ form {
     display: block;
     margin: 0 auto;
     width: 30%; }
+  form p {
+    text-align: center; }
 
 .ng-invalid.ng-touched {
   border: 1px solid red; }
