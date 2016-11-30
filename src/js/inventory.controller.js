@@ -50,7 +50,7 @@
              * @param  {Boolean} boolean sets switch to true or fals
              */
             this.customer = function customer(boolean){
-                if (boolean === true) {
+                if (boolean) {
                     this.uk = true;
                     this.currency = 'UBP $';
                 } else {
@@ -110,9 +110,8 @@
             };
 
             /**
-             * [sortOrder description]
-             * @param  {[type]} sort [description]
-             * @return {[type]}      [description]
+             * sets paramater for data table sort
+             * @param  {String} sort paramater for data sort
              */
             this.sortOrder = function sortOrder(sort){
                 console.log('imin');
