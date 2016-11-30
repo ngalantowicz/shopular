@@ -32577,3 +32577,37 @@ $provide.value("$locale", {
         }
     }
 }());
+
+(function() {
+    'use strict';
+
+    angular.module('shop')
+        .controller('LoginController', LoginController);
+
+    LoginController.$inject = ['SigninService'];
+
+    function LoginController(signIn) {
+        this.loginData = signIn.login();
+    }
+}());
+
+(function() {
+    'use strict';
+
+    angular.module('shop')
+        .factory('SigninService', SigninService);
+
+    function SigninService() {
+
+        return {
+            login: login
+        };
+
+        function login(loginInfo) {
+            this.loginData = {
+                username: loginInfo,
+                time: new Date()
+            };
+        }
+    }
+}());
