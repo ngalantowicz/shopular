@@ -32395,6 +32395,9 @@ $provide.value("$locale", {
     angular.module('shop')
         .controller('inventoryController', inventoryController);
 
+        /**
+         * Builds controller in shop module for template manipulation
+         */
         function inventoryController() {
 
             this.tax = 0.0575;
@@ -32421,6 +32424,10 @@ $provide.value("$locale", {
                             ];
 
 
+            /**
+             * Switch for form and table views
+             * @param  {Boolean} boolean sets switch to true or false
+             */
             this.showForm = function showForm(boolean){
                 if (boolean === true) {
                     this.formShow = true;
@@ -32429,6 +32436,10 @@ $provide.value("$locale", {
                 }
             };
 
+            /**
+             * Switch for uk or usa table view
+             * @param  {Boolean} boolean sets switch to true or fals
+             */
             this.customer = function customer(boolean){
                 if (boolean === true) {
                     this.uk = true;
@@ -32439,6 +32450,11 @@ $provide.value("$locale", {
                 }
             };
 
+            /**
+             * gets correct price for table data
+             * @param  {Object} item inventory data
+             * @return {Number}      correct price
+             */
             this.getPrice = function getPrice(item) {
                     var price;
                     var base = (item.price - item.discount);
@@ -32452,6 +32468,11 @@ $provide.value("$locale", {
                     }
             };
 
+            /**
+             * gets correct item name for appropriate table
+             * @param  {Object} item inventory data
+             * @return {String}      correct item name
+             */
             this.getName = function getName(item) {
                 if (this.uk === true) {
                     if (item.name === 'waste basket') {
@@ -32462,6 +32483,10 @@ $provide.value("$locale", {
                 return item.name;
             };
 
+            /**
+             * Creates new item in inventory data array
+             * @param  {Object} item new stock in inventory
+             */
             this.itemAdd = function itemAdd(item) {
                 this.inventory.push({
                     id: Math.ceil(Math.random()*1000),

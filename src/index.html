@@ -10,9 +10,9 @@
             .ng-invalid.ng-touched {
                 border: 1px solid red;
             }
-            /*.ng-invalid-required {
+            .ng-empty.ng-valid-minlength {
                 border: 1px solid red;
-            }*/
+            }
             </style>
 
     </head>
@@ -60,7 +60,7 @@
 
 
 
-            <input type='text' name='item' placeholder='Item' required ng-model='stock.newItem.name'>
+            <input type='text' name='item' placeholder='Item' required ng-model='stock.newItem.name' ng-minlength='1'>
             <input type='text' name='price' placeholder='Price' required ng-model='stock.newItem.price'>
             <input type='text' name='quanity' placeholder='Quanity' required ng-model='stock.newItem.quantity'>
             <input type='text' name='color' placeholder='Color' required ng-model='stock.newItem.color'>
