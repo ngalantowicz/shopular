@@ -5,16 +5,16 @@
         .factory('SigninService', SigninService);
 
     function SigninService() {
-
         return {
-            login: login
+            login: login,
         };
 
-        function login(loginInfo) {
-            this.loginData = {
-                username: loginInfo,
+        function login(user) {
+            var loginData = {
+                username: user,
                 time: new Date()
             };
+            return loginData;
         }
     }
 }());

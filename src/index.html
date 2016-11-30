@@ -9,13 +9,19 @@
     </head>
     <body ng-controller='InventoryController as stock'>
 
-        <header>
+        <header  ng-controller='LoginController as Login'>
             <h1>Shopular Inventory</h1>
             <nav>
                 <button ng-click='stock.customer(false); uk=""'>US</button>
                 <button ng-click='stock.customer(true); uk="uk"'>UK</button>
             </nav>
             <p class='new-item' ng-click='stock.showForm(true)'>Add New Item</p>
+            <form novalidate ng-hide='Login.loggedin' name='loginForm' ng-submit='Login.loggedin = true'>
+                <p>{{}}</p>
+                <input type='text' name='username' placeholder='username' ng-model='Login.user.username' required>
+                <input type='submit' value='login'>
+            </form>
+            <p ng-show='Login.loggedin'>{{Login.login(Login.user.username).username}} logged in on {{Login.login(Login.user.username).time | date: 'MMM d - h:mm a'}}</p>
         </header>
 
 

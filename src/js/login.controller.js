@@ -7,6 +7,10 @@
     LoginController.$inject = ['SigninService'];
 
     function LoginController(signIn) {
-        this.loginData = signIn.login();
+        this.user = {};
+        this.loggedin = false;
+        this.login = function login(user){
+            return signIn.login(user);
+        };
     }
 }());
