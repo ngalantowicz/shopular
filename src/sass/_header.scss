@@ -58,12 +58,12 @@ nav {
 }
 header {
      p {
-    text-align: center;
-    font-weight: bold;
-    margin: 3% 0;
-    &:nth-child(3n) {
-        color: #ff5555;
-    }
+        text-align: center;
+        font-weight: bold;
+        margin: 3% 0;
+        &:nth-child(3n) {
+            color: #ff5555;
+        }
     }
     form {
         margin-bottom: 0;
