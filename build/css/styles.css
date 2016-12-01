@@ -39,6 +39,7 @@ nav {
 
 .new-item {
   display: block;
+  color: #000000;
   margin: 10% auto;
   width: 15%;
   border: 1px solid black;
@@ -52,7 +53,10 @@ nav {
 
 header p {
   text-align: center;
+  font-weight: bold;
   margin: 3% 0; }
+  header p:nth-child(3n) {
+    color: #ff5555; }
 header form {
   margin-bottom: 0; }
 
@@ -103,9 +107,14 @@ form {
     margin: 0 auto;
     width: 30%; }
   form p {
-    text-align: center; }
+    text-align: center;
+    font-weight: bold;
+    color: #ff5555; }
 
 .ng-invalid.ng-touched {
+  border: 1px solid red; }
+
+.ng-submitted .ng-empty {
   border: 1px solid red; }
 
 /*# sourceMappingURL=styles.css.map */

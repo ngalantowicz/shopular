@@ -44,6 +44,7 @@ nav {
 }
 .new-item {
     display: block;
+    color: #000000;
     @include blockCenter(10%, 15%);
     border: 1px solid black;
     text-align: center;
@@ -58,7 +59,11 @@ nav {
 header {
      p {
     text-align: center;
+    font-weight: bold;
     margin: 3% 0;
+    &:nth-child(3n) {
+        color: #ff5555;
+    }
     }
     form {
         margin-bottom: 0;

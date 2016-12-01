@@ -17,10 +17,11 @@
                 <button ng-click='stock.customer(true); uk="uk"'>UK</button>
             </nav>
             <p class='new-item' ng-hide='!Login.loggedin' ng-click='stock.showForm(true)'>Add New Item</p>
-            <form novalidate ng-hide='Login.loggedin' name='loginForm' ng-submit='Login.loggedin = true'>
+            <form novalidate ng-hide='Login.loggedin' name='loginForm' ng-submit='Login.loggedin = true && loginForm.$valid'>
                 <input type='text' name='username' placeholder='username' ng-model='Login.user.username' required>
                 <input type='submit' value='login'>
             </form>
+            <p ng-show='loginForm.$submitted && !loginForm.username.$valid && !loginForm.$valid'>Username Required</p>
         </header>
 
 
@@ -48,11 +49,11 @@
 
         <form novalidate name='addItem' ng-hide='!stock.formShow' ng-submit='addItem.$valid && !stock.itemAdd(stock.newItem) && stock.showForm(false)'>
             <h3>Add New Item</h3>
-            <p ng-show='addItem.item.$touched && !addItem.item.$valid'>Need an Item</p>
-            <p ng-show='addItem.price.$touched && !addItem.price.$valid'>Need a Number</p>
-            <p ng-show='addItem.quanity.$touched && !addItem.quanity.$valid'>Need a Quantity</p>
-            <p ng-show='addItem.color.$touched && !addItem.color.$valid'>Need a Color</p>
-            <p ng-show='addItem.discount.$touched && !addItem.discount.$valid'>Need a Discount</p>
+            <p ng-show='addItem.item.$touched && !addItem.item.$valid || !addItem.item.$valid && addItem.$submitted'>Item Required</p>
+            <p ng-show='addItem.price.$touched && !addItem.price.$valid || !addItem.item.$valid && addItem.$submitted'>Price Required</p>
+            <p ng-show='addItem.quanity.$touched && !addItem.quanity.$valid || !addItem.item.$valid && addItem.$submitted'>Quantity Required</p>
+            <p ng-show='addItem.color.$touched && !addItem.color.$valid || !addItem.item.$valid && addItem.$submitted'>Color Required</p>
+            <p ng-show='addItem.discount.$touched && !addItem.discount.$valid || !addItem.item.$valid && addItem.$submitted'>Discount Required</p>
 
 
 
