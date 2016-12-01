@@ -4,12 +4,12 @@
     angular.module('shop')
         .controller('InventoryController', InventoryController);
 
-    InventoryController.$inject = ['LocalStorageService'];
+    InventoryController.$inject = ['LocalStorageService', 'TaxService'];
 
         /**
          * Builds controller in shop module for template manipulation
          */
-        function InventoryController(LSservice) {
+        function InventoryController(LSservice, taxService) {
 
             this.tax = 0.0575;
             this.uk = false;
@@ -22,8 +22,12 @@
             console.log(LSservice);
 
             this.inventory = LSservice.inventory;
+            this.taxRate = {};
 
 
+            this.newTaxRate = function newTaxRate(location) {
+                taxService.getTaxRate(location);
+            };
             /**
              * Switch for form and table views
              * @param  {Boolean} boolean sets switch to true or false
