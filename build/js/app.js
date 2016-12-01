@@ -32664,6 +32664,7 @@ $provide.value("$locale", {
             });
         }
 
+
         /**
          * calls API to recieve tax rate based on state and zipcode
          * @param  {Strin} state   State used for api query
@@ -32671,15 +32672,9 @@ $provide.value("$locale", {
          * @return {Promise}         Functions to handle resolved data
          */
         function taxRate(zipcode) {
-            return $http({
-                method: 'GET',
-                url: 'https://taxrates.api.avalara.com:443/postal?country=usa&postal='+ zipcode,
-                dataType: 'json',
-                headers: {
-                    'Authorization': 'AvalaraApiKey RStltT3vmx3opmsghkoIA//8mVThxoGURGwF0pYacxmO20UW66XPK49niaG0hZl689TJIrx5W2TCXhNy2KVEdw=='
-                }
-            }). then( function handleSuccess(data){
-                console.log('rate in fn', data);
+            return $http.jsonp('https://taxrates.api.avalara.com:443/postal?country=usa&postal='+ zipcode + '&apikey=RStltT3vmx3opmsghkoIA//8mVThxoGURGwF0pYacxmO20UW66XPK49niaG0hZl689TJIrx5W2TCXhNy2KVEdw==')
+                .then( function handleSuccess(data){
+                console.log('rate in fn', (data));
             });
         }
     }
