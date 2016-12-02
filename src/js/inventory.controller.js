@@ -19,9 +19,28 @@
             this.sortBy = 'price';
             this.reverse = false;
             //this.taxRate = {};
+            this.inventory = LSservice.getInventory;
 
-            this.inventory = LSservice.inventory;
-
+            /**
+             * passes item to localstorage and inventory in LocalStore service
+             * @param  {Object} item new inventory object
+             * @return {void}
+             */
+            this.itemAdd =  function itemAdd(item) {
+                if (typeof(item) !== 'object') {
+                    return;
+                } else if (item.price < 0 || !item.price) {
+                    item.price = 0;
+                } else if (item.discount < 0 || !item.discount) {
+                    item.discount = 0;
+                } else if (item.discount < 0 || !item.quantity) {
+                    item.quantity = 0;
+                } else if (!item.name) {
+                    return;
+                }
+                LSservice.itemAdd(item);
+                this.newItem = {};
+            };
 
 
             // this.newTaxRate = function newTaxRate(location) {
@@ -98,40 +117,6 @@
                     }
                 }
                 return item.name;
-            };
-
-            /**
-             * Creates new item in inventory data array
-             * @param  {Object} item new stock in inventory
-             * @return {void}
-             */
-            this.itemAdd = function itemAdd(item) {
-                item.price = Number(item.price);
-                item.discount = Number(item.discount);
-                item.quantity = Number(item.quantity);
-
-                if (item.price < 0 || !item.price) {
-                    item.price = 0;
-                } else if (item.discount < 0 || !item.discount) {
-                    item.discount = 0;
-                } else if (item.discount < 0 || !item.quantity) {
-                    item.quantity = 0;
-                } else if (!item.name) {
-                    return;
-                }
-
-                console.log('inventory', this.inventory);
-
-                this.inventory.push({
-                    id: Math.ceil(Math.random()*1000),
-                    name: item.name,
-                    price: item.price,
-                    quantity: item.quantity || 0,
-                    color: item.color,
-                    discount: item.discount
-                });
-                LSservice.addToLocalStorage(this.inventory);
-                this.newItem = {};
             };
 
             /**

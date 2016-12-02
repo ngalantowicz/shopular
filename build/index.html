@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html ng-app='shop'>
+    <head>
+        <meta charset="utf-8">
+        <title>Shopular</title>
+
+        <link href='css/styles.css' type='text/css' rel='stylesheet'>
+
+    </head>
+    <body ng-controller='InventoryController as stock'>
+
+        <header  ng-controller='LoginController as Login'>
+            <h1>Shopular Inventory</h1>
+            <p ng-show='Login.loggedin'>{{Login.login(Login.user.username).username}} logged in on {{Login.login(Login.user.username).time | date: 'MMM d - h:mm a'}}</p>
+            <nav>
+                <button ng-click='stock.customer(false); uk=""'>US</button>
+                <button ng-click='stock.customer(true); uk="uk"'>UK</button>
+            </nav>
+            <p class='new-item' ng-hide='!Login.loggedin' ng-click='stock.showForm(true)'>Add New Item</p>
+            <form novalidate ng-hide='Login.loggedin' name='loginForm' ng-submit='Login.loggedin = true && loginForm.$valid'>
+                <input type='text' name='username' placeholder='username' ng-model='Login.user.username' required>
+                <input type='submit' value='login'>
+            </form>
+            <p ng-show='loginForm.$submitted && !loginForm.username.$valid && !loginForm.$valid'>Username Required</p>
+        </header>
+
+
+        <main ng-hide='stock.formShow'>
+            <!--hiding until ajax works-->
+            <form ng-hide='true' ng-submit='stock.newTaxRate(stock.taxRate)'>
+                <input type='text' name='city' placeholder='city' ng-model='stock.taxRate.city'>
+                <input type='text' name='state' placeholder='state' ng-model='stock.taxRate.state'>
+                <input type='submit' value='Find TaxRate'>
+            </form>
+            <table ng-class='uk'>
+                <thead>
+                    <tr>
+                        <th ng-click='stock.sortOrder("name")'>Item</th>
+                        <th ng-click='stock.sortOrder("price")'>Price</th>
+                        <th ng-click='stock.sortOrder("quantity")'>Quantity</th>
+                        <th ng-click='stock.sortOrder("color")' ng-hide='stock.uk === true'>Color</th>
+                        <th ng-click='stock.sortOrder("color")' ng-hide='!stock.uk'>Colour</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat='item in stock.inventory | orderBy:stock.sortBy'>
+                        <td>{{ stock.getName(item) }}</td>
+                        <td>{{ stock.getPrice(item) | currency: stock.currency }}<img ng-show='item.discount > 0' src='https://tiy-learn-content.s3.amazonaws.com/98350f05-sale_2.png'></td>
+                        <td>{{ item.quantity }}</td>
+                        <td>{{ item.color }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </main>
+
+        <form novalidate name='addItem' ng-hide='!stock.formShow' ng-submit='addItem.$valid && !stock.itemAdd(stock.newItem) && stock.showForm(false)'>
+            <h3>Add New Item</h3>
+            <p ng-show='addItem.item.$touched && !addItem.item.$valid || !addItem.item.$valid && addItem.$submitted'>Item Required</p>
+            <p ng-show='addItem.price.$touched && !addItem.price.$valid || !addItem.item.$valid && addItem.$submitted'>Price Required</p>
+            <p ng-show='addItem.quanity.$touched && !addItem.quanity.$valid || !addItem.item.$valid && addItem.$submitted'>Quantity Required</p>
+            <p ng-show='addItem.color.$touched && !addItem.color.$valid || !addItem.item.$valid && addItem.$submitted'>Color Required</p>
+            <p ng-show='addItem.discount.$touched && !addItem.discount.$valid || !addItem.item.$valid && addItem.$submitted'>Discount Required</p>
+
+
+
+            <input type='text' name='item' placeholder='Item' required ng-model='stock.newItem.name' ng-minlength='1'>
+            <input type='text' name='price' placeholder='Price' required ng-model='stock.newItem.price'>
+            <input type='text' name='quanity' placeholder='Quanity' required ng-model='stock.newItem.quantity'>
+            <input type='text' name='color' placeholder='Color' required ng-model='stock.newItem.color'>
+            <input type='text' name='discount' placeholder='Discount' required ng-model='stock.newItem.discount'>
+            <input type='submit'>
+        </form>
+
+        <footer>
+            <h2>&copy; Shopular Technologies</h2>
+        </footer>
+
+        <script src='js/app.js'></script>
+    </body>
+</html>

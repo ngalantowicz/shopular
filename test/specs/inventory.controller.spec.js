@@ -15,7 +15,7 @@
 
         beforeEach(inject(function($controller) {
 
-            mockLocalStorageService.getLocalStorage = function() {
+            mockLocalStorageService.getInventory = function() {
                 return [{
                     id:2323,
                     name:'banana',
@@ -26,12 +26,13 @@
                 }];
             };
 
-            mockLocalStorageService.addToLocalStorage = function(argOne) {
-                mockLocalStorageService.add.numTimesCalled++;
-                mockLocalStorageService.add.lastArgument =  argOne;
+            mockLocalStorageService.itemAdd = function(argOne) {
+                mockLocalStorageService.itemAdd.numTimesCalled++;
+                mockLocalStorageService.itemAdd.lastArgument =  argOne;
             };
 
-            mockLocalStorageService.inventory = mockLocalStorageService.getLocalStorage;
+            mockLocalStorageService.itemAdd.numTimesCalled = 0;
+            mockLocalStorageService.inventory = mockLocalStorageService.getInventory;
             InventoryController = $controller('InventoryController');
         }));
 
@@ -170,6 +171,7 @@
         });
 
         describe('getName fn', function() {
+
             it('should return a string when passed an object based of scope variable this.uk', function() {
                 var name = InventoryController.getName({
                                 id:2323,
@@ -208,10 +210,9 @@
         });
 
         describe('itemAdd fn', function() {
-            it('should add new stock item to inventory in localStorage', function() {
-                var inventory = InventoryController.inventory();
 
-                expect(inventory.length).to.equal(1);
+            it('should add new stock item to inventory in localStorage', function() {
+
                 InventoryController.itemAdd({
                                 id:23,
                                 name:'waste basket',
@@ -220,8 +221,26 @@
                                 color:'black',
                                 discount: 1
                             });
-                inventory = InventoryController.inventory();
+                expect(mockLocalStorageService.itemAdd.numTimesCalled).to.equal(1);
+                expect(mockLocalStorageService.itemAdd.lastArgument).to.be.an('object');
+                expect(Object.keys(mockLocalStorageService.itemAdd.lastArgument).length).to.equal(6);
+                expect(mockLocalStorageService.itemAdd.lastArgument).to.include.keys('id', 'name', 'price', 'quantity', 'color', 'discount');
+
             });
+
+            it('should clear newItem obj that is used with ng-model', function() {
+                InventoryController.newItem = {name: 'nick', discount: 2, quantity: 21, color: 'brown'};
+                InventoryController.itemAdd({
+                    id:23,
+                    price: 5,
+                    name: 'banana',
+                    quantity: 21,
+                    color:'black',
+                    discount: 1
+                });
+                expect(Object.keys(InventoryController.newItem).length).to.equal(0);
+            });
+
             it('should return undefined if passed object has no name key', function() {
                 var faultyObj = InventoryController.itemAdd({
                                 id:23,
@@ -232,17 +251,15 @@
                             });
                 expect(faultyObj).to.equal(undefined);
             });
-            xit('should clear newItem obj that is used with ng-model', function() {
-                InventoryController.newItem = {name: 'nick', discount: 2, quantity: 21, color: 'brown'};
-                InventoryController.itemAdd({
-                    id:23,
-                    price: 5,
-                    name: 'banana',
-                    quantity: 21,
-                    color:'black',
-                    discount: 1
-                });
-                expect(Object.keys(InventoryController.newItem.length)).to.equal(0);
+
+            it('should return undefined if passed string', function() {
+                var faultyObj = InventoryController.itemAdd('nick');
+                expect(faultyObj).to.equal(undefined);
+            });
+
+            it('should return undefined if passed number', function() {
+                var faultyObj = InventoryController.itemAdd(14);
+                expect(faultyObj).to.equal(undefined);
             });
         });
     });

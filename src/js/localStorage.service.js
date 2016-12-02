@@ -10,7 +10,7 @@
      */
     function LocalStorageService() {
 
-        var inventory = getLocalStorage() || [
+        var inventory = [
                           { "id": 2957, "name": "widget", "price": 32, "quantity": 203, "color": "red", "discount": 31 },
                           { "id": 89274, "name": "golf club", "price": 98, "quantity": 10, "color": "black", "discount": 0 },
                           { "id": 64, "name": "iPhone", "price": 499, "quantity": 2, "color": "white", "discount": 0 },
@@ -26,20 +26,46 @@
                         ];
 
         return {
-            getLocalStorage: getLocalStorage,
-            addToLocalStorage: addToLocalStorage
+            getInventory: getInventory,
+            addToLocalStorage: addToLocalStorage,
+            itemAdd: itemAdd
         };
 
 
+        /**
+         * Creates new item in inventory data array
+         * @param  {Object} item new stock in inventory
+         * @return {void}
+         */
+        function itemAdd(item) {
+            item.price = Number(item.price);
+            item.discount = Number(item.discount);
+            item.quantity = Number(item.quantity);
 
+            console.log('inventory', inventory);
+
+            inventory.push({
+                id: Math.ceil(Math.random()*1000),
+                name: item.name,
+                price: item.price,
+                quantity: item.quantity,
+                color: item.color,
+                discount: item.discount
+            });
+            addToLocalStorage(inventory);
+        }
 
         /**
          * Gets all inventory data in LocalStorage
          * @return {Array} inventory array with all LocalStorage Objects
          */
-        function getLocalStorage() {
+        function getInventory() {
             var localStorage = JSON.parse(window.localStorage.getItem('inventory'));
-            return localStorage;
+            if(localStorage) {
+                return localStorage;
+            } else {
+                return inventory;
+            }
         }
 
         /**
