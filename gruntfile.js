@@ -108,8 +108,8 @@ module.exports = function(grunt) {
                 tasks: [ 'sass' ]
             },
             test: {
-                files: ['test/specs/**/*.js', 'test/*.html'],
-                tasks: ['test']
+                files: ['test/specs/**/*.js'],
+                tasks: ['test', 'karma']
             }
         }
     });
@@ -124,6 +124,6 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-karma');
 
     grunt.registerTask( 'test', [ 'jshint']);
-    grunt.registerTask( 'default', [ 'clean', 'test', 'karma', 'copy', 'concat' ] );
+    grunt.registerTask( 'default', [ 'clean', 'test', 'copy', 'concat' ] );
 
 };

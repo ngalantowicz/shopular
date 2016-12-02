@@ -32424,7 +32424,10 @@ $provide.value("$locale", {
              * @return {void}
              */
             this.showForm = function showForm(boolean){
-                if (boolean === true) {
+                if (typeof(boolean) !== 'boolean') {
+                    return;
+                }
+                else if (boolean === true) {
                     this.formShow = true;
                 } else {
                     this.formShow = false;
@@ -32437,7 +32440,10 @@ $provide.value("$locale", {
              * @return {void}
              */
             this.customer = function customer(boolean){
-                if (boolean) {
+                if (typeof(boolean) !== 'boolean') {
+                    return;
+                }
+                else if (boolean) {
                     this.uk = true;
                     this.currency = 'UBP $';
                 } else {
@@ -32452,15 +32458,18 @@ $provide.value("$locale", {
              * @return {Number}      correct price
              */
             this.getPrice = function getPrice(item) {
-                    var price;
-                    var base = (item.price - item.discount);
-                    var tax = (item.price - item.discount) * this.tax;
-                    if (this.uk) {
-                        price = (base + tax) * 1.5;
-                    } else {
-                        price = (base + tax);
-                    }
-                    return price;
+                if (!item.price || !item.discount || item.price < 0 || item.discount < 0 || Object.keys(item).length === 0) {
+                    return;
+                }
+                var price;
+                var base = (item.price - item.discount);
+                var tax = (item.price - item.discount) * this.tax;
+                if (this.uk) {
+                    price = (base + tax) * 1.5;
+                } else {
+                    price = (base + tax);
+                }
+                return price;
             };
 
             /**
@@ -32469,6 +32478,9 @@ $provide.value("$locale", {
              * @return {String}      correct item name
              */
             this.getName = function getName(item) {
+                if (!item.name || Object.keys(item).length === 0) {
+                    return;
+                }
                 var ukName = 'rubbish bin';
                 if (this.uk) {
                     if (item.name === 'waste basket') {
@@ -32489,14 +32501,14 @@ $provide.value("$locale", {
                 item.discount = Number(item.discount);
                 item.quantity = Number(item.quantity);
 
-                if (typeof(item.price) !== 'number' || !item.price) {
+                if (item.price < 0 || !item.price) {
                     item.price = 0;
-                }
-                if (typeof(item.discount) !== 'number' || !item.discount) {
+                } else if (item.discount < 0 || !item.discount) {
                     item.discount = 0;
-                }
-                if (typeof(item.quantity) !== 'number' || !item.quantity) {
+                } else if (item.discount < 0 || !item.quantity) {
                     item.quantity = 0;
+                } else if (!item.name) {
+                    return;
                 }
                 this.inventory.push({
                     id: Math.ceil(Math.random()*1000),
