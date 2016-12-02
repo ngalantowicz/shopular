@@ -119,13 +119,16 @@
                 } else if (!item.name) {
                     return;
                 }
+
+                console.log('inventory', this.inventory);
+
                 this.inventory.push({
                     id: Math.ceil(Math.random()*1000),
                     name: item.name,
-                    price: (item.price),
-                    quantity: item.quantity,
+                    price: item.price,
+                    quantity: item.quantity || 0,
                     color: item.color,
-                    discount: (item.discount)
+                    discount: item.discount
                 });
                 LSservice.addToLocalStorage(this.inventory);
                 this.newItem = {};

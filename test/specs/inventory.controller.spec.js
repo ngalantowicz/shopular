@@ -210,6 +210,8 @@
         describe('itemAdd fn', function() {
             it('should add new stock item to inventory in localStorage', function() {
                 var inventory = InventoryController.inventory();
+
+                expect(inventory.length).to.equal(1);
                 InventoryController.itemAdd({
                                 id:23,
                                 name:'waste basket',
@@ -219,7 +221,28 @@
                                 discount: 1
                             });
                 inventory = InventoryController.inventory();
-                //expect(inventory.length).to.equal(2);
+            });
+            it('should return undefined if passed object has no name key', function() {
+                var faultyObj = InventoryController.itemAdd({
+                                id:23,
+                                price: 5,
+                                quantity: 21,
+                                color:'black',
+                                discount: 1
+                            });
+                expect(faultyObj).to.equal(undefined);
+            });
+            xit('should clear newItem obj that is used with ng-model', function() {
+                InventoryController.newItem = {name: 'nick', discount: 2, quantity: 21, color: 'brown'};
+                InventoryController.itemAdd({
+                    id:23,
+                    price: 5,
+                    name: 'banana',
+                    quantity: 21,
+                    color:'black',
+                    discount: 1
+                });
+                expect(Object.keys(InventoryController.newItem.length)).to.equal(0);
             });
         });
     });

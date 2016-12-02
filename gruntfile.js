@@ -109,7 +109,7 @@ module.exports = function(grunt) {
             },
             test: {
                 files: ['test/specs/**/*.js'],
-                tasks: ['test', 'karma']
+                tasks: ['test']
             }
         }
     });
@@ -123,7 +123,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-karma');
 
-    grunt.registerTask( 'test', [ 'jshint']);
+    grunt.registerTask( 'test', [ 'jshint', 'karma']);
     grunt.registerTask( 'default', [ 'clean', 'test', 'copy', 'concat' ] );
 
 };

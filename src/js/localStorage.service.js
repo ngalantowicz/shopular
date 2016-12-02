@@ -10,7 +10,7 @@
      */
     function LocalStorageService() {
 
-        this.inventory = getLocalStorage() || [
+        var inventory = getLocalStorage() || [
                           { "id": 2957, "name": "widget", "price": 32, "quantity": 203, "color": "red", "discount": 31 },
                           { "id": 89274, "name": "golf club", "price": 98, "quantity": 10, "color": "black", "discount": 0 },
                           { "id": 64, "name": "iPhone", "price": 499, "quantity": 2, "color": "white", "discount": 0 },
@@ -27,9 +27,10 @@
 
         return {
             getLocalStorage: getLocalStorage,
-            addToLocalStorage: addToLocalStorage,
-            inventory: this.inventory
+            addToLocalStorage: addToLocalStorage
         };
+
+
 
 
         /**
