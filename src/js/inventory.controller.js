@@ -19,7 +19,8 @@
             this.sortBy = 'price';
             this.reverse = false;
             //this.taxRate = {};
-            this.inventory = LSservice.getInventory;
+            //
+            this.inventory = LSservice.getInventory();
 
             /**
              * passes item to localstorage and inventory in LocalStore service
@@ -86,7 +87,7 @@
              * @return {Number}      correct price
              */
             this.getPrice = function getPrice(item) {
-                if (!item.price || !item.discount || item.price < 0 || item.discount < 0 || Object.keys(item).length === 0) {
+                if (!item.price || item.price < 0 || item.discount < 0 || Object.keys(item).length === 0) {
                     return;
                 }
                 var price;

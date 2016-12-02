@@ -32410,8 +32410,29 @@ $provide.value("$locale", {
             this.sortBy = 'price';
             this.reverse = false;
             //this.taxRate = {};
-            this.inventory = LSservice.getInventory;
+            //
+            this.inventory = LSservice.getInventory();
 
+            /**
+             * passes item to localstorage and inventory in LocalStore service
+             * @param  {Object} item new inventory object
+             * @return {void}
+             */
+            this.itemAdd =  function itemAdd(item) {
+                if (typeof(item) !== 'object') {
+                    return;
+                } else if (item.price < 0 || !item.price) {
+                    item.price = 0;
+                } else if (item.discount < 0 || !item.discount) {
+                    item.discount = 0;
+                } else if (item.discount < 0 || !item.quantity) {
+                    item.quantity = 0;
+                } else if (!item.name) {
+                    return;
+                }
+                LSservice.itemAdd(item);
+                this.newItem = {};
+            };
 
 
             // this.newTaxRate = function newTaxRate(location) {
@@ -32457,7 +32478,7 @@ $provide.value("$locale", {
              * @return {Number}      correct price
              */
             this.getPrice = function getPrice(item) {
-                if (!item.price || !item.discount || item.price < 0 || item.discount < 0 || Object.keys(item).length === 0) {
+                if (!item.price || item.price < 0 || item.discount < 0 || Object.keys(item).length === 0) {
                     return;
                 }
                 var price;
@@ -32540,7 +32561,6 @@ $provide.value("$locale", {
             itemAdd: itemAdd
         };
 
-
         /**
          * Creates new item in inventory data array
          * @param  {Object} item new stock in inventory
@@ -32551,23 +32571,13 @@ $provide.value("$locale", {
             item.discount = Number(item.discount);
             item.quantity = Number(item.quantity);
 
-            if (item.price < 0 || !item.price) {
-                item.price = 0;
-            } else if (item.discount < 0 || !item.discount) {
-                item.discount = 0;
-            } else if (item.discount < 0 || !item.quantity) {
-                item.quantity = 0;
-            } else if (!item.name) {
-                return;
-            }
-
             console.log('inventory', inventory);
 
             inventory.push({
                 id: Math.ceil(Math.random()*1000),
                 name: item.name,
                 price: item.price,
-                quantity: item.quantity || 0,
+                quantity: item.quantity,
                 color: item.color,
                 discount: item.discount
             });

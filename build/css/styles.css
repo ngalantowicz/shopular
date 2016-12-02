@@ -1,0 +1,120 @@
+h1 {
+  text-align: center;
+  font-size: 3em;
+  margin-bottom: 2%; }
+
+nav {
+  margin: 0 auto;
+  width: 30%; }
+  nav button {
+    float: left;
+    margin: 0 auto;
+    width: 50%;
+    margin-bottom: 10%;
+    font-size: 1.5em;
+    font-weight: bolder;
+    color: #000000;
+    text-align: center;
+    position: relative; }
+    nav button:nth-child(even)::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      background-image: url("https://flagspot.net/images/g/gb.gif");
+      opacity: 0.2;
+      margin-bottom: 5%; }
+    nav button:nth-child(odd)::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      background-image: url("https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/US_flag_48_stars.svg/220px-US_flag_48_stars.svg.png");
+      opacity: 0.2;
+      margin-bottom: 2%; }
+
+.new-item {
+  display: block;
+  color: #000000;
+  margin: 10% auto;
+  width: 15%;
+  border: 1px solid black;
+  text-align: center;
+  padding: 1%;
+  margin-bottom: 0; }
+  .new-item:hover {
+    color: #ffffff;
+    border: 1px solid white;
+    background-color: #000000; }
+
+header p {
+  text-align: center;
+  font-weight: bold;
+  margin: 3% 0; }
+  header p:nth-child(3n) {
+    color: #ff5555; }
+header form {
+  margin-bottom: 0; }
+
+table {
+  margin: 5% auto;
+  width: 50%;
+  border-collapse: collapse;
+  position: relative; }
+  table::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/US_flag_48_stars.svg/220px-US_flag_48_stars.svg.png");
+    opacity: 0.2;
+    z-index: -1; }
+  table.uk::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("https://flagspot.net/images/g/gb.gif");
+    opacity: 0.2;
+    z-index: -1; }
+
+th {
+  border: 2px solid #000000;
+  box-sizing: border-box;
+  font-weight: bold; }
+
+td {
+  border: 2px solid #000000;
+  font-weight: bold; }
+
+form {
+  display: block;
+  margin: 10% auto;
+  width: 60%;
+  margin-top: 3%; }
+  form h3 {
+    text-align: center; }
+  form input {
+    display: block;
+    margin: 0 auto;
+    width: 30%; }
+  form p {
+    text-align: center;
+    font-weight: bold;
+    color: #ff5555; }
+
+.ng-invalid.ng-touched {
+  border: 1px solid red; }
+
+.ng-submitted .ng-empty {
+  border: 1px solid red; }
+
+/*# sourceMappingURL=styles.css.map */

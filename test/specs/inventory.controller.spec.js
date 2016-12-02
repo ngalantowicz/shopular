@@ -47,7 +47,7 @@
                 expect(InventoryController.sortBy).to.be.a('string');
                 expect(InventoryController.reverse).to.be.a('boolean');
                 expect(InventoryController.showForm).to.be.a('function');
-                var inventory = InventoryController.inventory();
+                var inventory = InventoryController.inventory;
                 expect(inventory).to.be.an('array');
                 expect(inventory.length).to.equal(1);
                 expect(Object.keys(inventory[0]).length).to.equal(6);
@@ -124,7 +124,7 @@
                 expect(ukPrice).to.equal(((22-4)+((22-4)*InventoryController.tax))*1.5);
             });
 
-            it('should return undefined if object with !discount or !price keys are passed in', function() {
+            it('should return undefined if object with !price keys are passed in', function() {
                 var noPrice = InventoryController.getPrice({
                                 id:2323,
                                 name:'banana',
@@ -133,36 +133,8 @@
                                 discount:4
                             });
                 expect(noPrice).to.equal(undefined);
-                var noDiscount = InventoryController.getPrice({
-                                id:2323,
-                                name:'banana',
-                                price: 24,
-                                quantity:2,
-                                color:'yellow'
-                            });
-                expect(noDiscount).to.equal(undefined);
             });
 
-            it('should return undefined if object with discount < 0 or price < 0 are passed in', function() {
-                var negPrice = InventoryController.getPrice({
-                                id:2323,
-                                name:'banana',
-                                price: -3,
-                                quantity:2,
-                                color:'yellow',
-                                discount:4
-                            });
-                expect(negPrice).to.equal(undefined);
-                var negDiscount = InventoryController.getPrice({
-                                id:2323,
-                                name:'banana',
-                                price: 24,
-                                quantity:2,
-                                color:'yellow',
-                                discount: -4
-                            });
-                expect(negDiscount).to.equal(undefined);
-            });
 
             it('should return undefined if object is empty', function() {
                 var emptyObj = InventoryController.getPrice({});

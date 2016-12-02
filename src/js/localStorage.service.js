@@ -31,7 +31,6 @@
             itemAdd: itemAdd
         };
 
-
         /**
          * Creates new item in inventory data array
          * @param  {Object} item new stock in inventory
