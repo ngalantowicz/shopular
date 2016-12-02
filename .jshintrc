@@ -89,6 +89,8 @@
     // Custom Globals
     "globals"       : {
         "angular" : true,
-        "$http" : true
+        "$http" : true,
+        "module" : true,
+        "inject": true
         }        // additional predefined global variables
 }
