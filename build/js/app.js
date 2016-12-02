@@ -32571,8 +32571,6 @@ $provide.value("$locale", {
             item.discount = Number(item.discount);
             item.quantity = Number(item.quantity);
 
-            console.log('inventory', inventory);
-
             inventory.push({
                 id: Math.ceil(Math.random()*1000),
                 name: item.name,
