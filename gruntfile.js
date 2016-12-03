@@ -88,8 +88,11 @@ module.exports = function(grunt) {
                         'src/js/shop.module.js',
                         'src/js/inventory.controller.js',
                         'src/js/localStorage.service.js',
+                        'src/js/login.controller.js',
+                        'src/js/signin.service.js',
                         'test/specs/inventory.controller.spec.js',
-                        'test/specs/localStorage.service.spec.js'
+                        'test/specs/localStorage.service.spec.js',
+                        'test/specs/login.controller.spec.js'
                     ]
                 }
             }
