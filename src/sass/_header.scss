@@ -14,7 +14,7 @@ nav {
         color: #000000;
         text-align: center;
         position: relative;
-        &:nth-child(even){
+        &:nth-child(even) {
             &::after {
                 content: '';
                 position: absolute;
@@ -27,7 +27,7 @@ nav {
                 margin-bottom: 5%;
             }
         }
-        &:nth-child(odd){
+        &:nth-child(odd) {
             &::after {
                 content: '';
                 position: absolute;

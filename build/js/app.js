@@ -32386,6 +32386,7 @@ $provide.value("$locale", {
     'use strict';
 
     angular.module('shop', []);
+
     
 }());
 
@@ -32614,10 +32615,18 @@ $provide.value("$locale", {
 
     LoginController.$inject = ['SigninService'];
 
+    /**
+     * Takes in username and passes data to Dom and Service
+     * @param {String} signIn name of app user
+     * @return {Object} the username and time signed in
+     */
     function LoginController(signIn) {
         this.user = {};
         this.loggedin = false;
         this.login = function login(user){
+            if (typeof(user) === 'object' || !user) {
+                return;
+            }
             return signIn.login(user);
         };
     }
@@ -32628,7 +32637,6 @@ $provide.value("$locale", {
 
     angular.module('shop')
         .factory('SigninService', SigninService);
-
 
     /**
      * Signin Service constructor with login functionality

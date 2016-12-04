@@ -4,7 +4,6 @@
     angular.module('shop')
         .factory('SigninService', SigninService);
 
-
     /**
      * Signin Service constructor with login functionality
      */

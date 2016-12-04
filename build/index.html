@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html ng-app='shop'>
     <head>
+
         <meta charset="utf-8">
         <title>Shopular</title>
 
@@ -13,8 +14,8 @@
             <h1>Shopular Inventory</h1>
             <p ng-show='Login.loggedin'>{{Login.login(Login.user.username).username}} logged in on {{Login.login(Login.user.username).time | date: 'MMM d - h:mm a'}}</p>
             <nav>
-                <button ng-click='stock.customer(false); uk=""'>US</button>
-                <button ng-click='stock.customer(true); uk="uk"'>UK</button>
+                <button ng-click='stock.customer(false)'>US</button>
+                <button ng-click='stock.customer(true)'>UK</button>
             </nav>
             <p class='new-item' ng-hide='!Login.loggedin' ng-click='stock.showForm(true)'>Add New Item</p>
             <form novalidate ng-hide='Login.loggedin' name='loginForm' ng-submit='Login.loggedin = true && loginForm.$valid'>
@@ -32,7 +33,26 @@
                 <input type='text' name='state' placeholder='state' ng-model='stock.taxRate.state'>
                 <input type='submit' value='Find TaxRate'>
             </form>
-            <table ng-class='uk'>
+            <table ng-hide='stock.uk'>
+                <thead>
+                    <tr>
+                        <th ng-click='stock.sortOrder("name")'>Item</th>
+                        <th ng-click='stock.sortOrder("price")'>Price</th>
+                        <th ng-click='stock.sortOrder("quantity")'>Quantity</th>
+                        <th ng-click='stock.sortOrder("color")' ng-hide='stock.uk === true'>Color</th>
+                        <th ng-click='stock.sortOrder("color")' ng-hide='!stock.uk'>Colour</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat='item in stock.inventory | orderBy:stock.sortBy'>
+                        <td>{{ stock.getName(item) }}</td>
+                        <td>{{ stock.getPrice(item) | currency: stock.currency }}<img ng-show='item.discount > 0' src='https://tiy-learn-content.s3.amazonaws.com/98350f05-sale_2.png'></td>
+                        <td>{{ item.quantity }}</td>
+                        <td>{{ item.color }}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class='uk' ng-show='stock.uk'>
                 <thead>
                     <tr>
                         <th ng-click='stock.sortOrder("name")'>Item</th>

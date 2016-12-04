@@ -92,7 +92,8 @@ module.exports = function(grunt) {
                         'src/js/signin.service.js',
                         'test/specs/inventory.controller.spec.js',
                         'test/specs/localStorage.service.spec.js',
-                        'test/specs/login.controller.spec.js'
+                        'test/specs/login.controller.spec.js',
+                        'test/specs/signin.service.spec.js'
                     ]
                 }
             }
