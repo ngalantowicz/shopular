@@ -8,7 +8,7 @@ nav {
     button {
         float: left;
         @include blockCenter(0, 50%);
-        margin-bottom: $buttMrgBot;
+        margin-bottom: $buttMrgBottom;
         font-size: $buttFontSize;
         font-weight: bolder;
         color: #000000;
@@ -23,8 +23,8 @@ nav {
                 height: 100%;
                 width: 100%;
                 background-image: url('https://flagspot.net/images/g/gb.gif');
-                opacity: 0.2;
-                margin-bottom: 5%;
+                opacity: $butBckgrnOpacity;
+                margin-bottom: $buttMrgBottom;
             }
         }
         &:nth-child(odd) {
@@ -36,34 +36,44 @@ nav {
                 height: 100%;
                 width: 100%;
                 background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/US_flag_48_stars.svg/220px-US_flag_48_stars.svg.png');
-                opacity: 0.2;
-                margin-bottom: 2%;
+                opacity: $butBckgrnOpacity;
+                margin-bottom: $buttMrgBot;
             }
         }
     }
 }
 .new-item {
     display: block;
-    color: #000000;
+    color: $NewItemButtColor;
     @include blockCenter(10%, 15%);
-    border: 1px solid black;
+    border: 1px solid $NewItemButtColor;
     text-align: center;
-    padding: 1%;
+    padding: $newItemPadding;
     margin-bottom: 0;
     &:hover {
-        color: #ffffff;
-        border: 1px solid white;
-        background-color: #000000;
+        color: $NewItemButtColorHove;
+        border: 1px solid $NewItemButtColorHove;
+        background-color: $NewItemButtColor;
     }
 }
 header {
+    position: relative;
      p {
         text-align: center;
         font-weight: bold;
         margin: 3% 0;
-        &:nth-child(3n) {
-            color: #ff5555;
+        &:nth-child(3n + 1) {
+            color: $errMsgFntColor;
         }
+    }
+    .logout {
+        text-align: center;
+        border: 1px solid $logoutBordColor;
+        color: $logoutFontColor;
+        @include blockCenter(0, 15%);
+        position: absolute;
+        top: 8%;
+        right: 0;
     }
     form {
         margin-bottom: 0;
