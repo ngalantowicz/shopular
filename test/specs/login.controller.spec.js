@@ -49,7 +49,7 @@
                 expect(loginObj).to.equal(undefined);
                 var loginObj2 = LoginController.login({username: 'nick'});
                 expect(loginObj2).to.equal(undefined);
-            }) ;
+            });
         });
     });
 }());

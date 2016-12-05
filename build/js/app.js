@@ -32669,6 +32669,7 @@ $provide.value("$locale", {
         };
 
         function login(user) {
+            console.log(user);
             var loginData = {
                 username: user,
                 time: new Date()
