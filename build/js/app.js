@@ -32396,12 +32396,12 @@ $provide.value("$locale", {
     angular.module('shop')
         .controller('InventoryController', InventoryController);
 
-    InventoryController.$inject = ['LocalStorageService'];
+    InventoryController.$inject = ['LocalStorageService', 'TaxService'];
 
         /**
          * Builds controller in shop module for template manipulation
          */
-        function InventoryController(LSservice) {
+        function InventoryController(LSservice, TaxService) {
 
             this.tax = 0.0575;
             this.uk = false;
@@ -32410,10 +32410,32 @@ $provide.value("$locale", {
             this.formShow = false;
             this.sortBy = 'price';
             this.reverse = false;
-            //this.taxRate = {};
-            //
+            this.taxRate = {};
+
             this.inventory = LSservice.getInventory();
 
+
+            this.newTaxRate = function newTaxRate(location) {
+                if (!location) {
+                    return;
+                }
+            TaxService.getTaxRate(location)
+                    .then( function handleTax(rateData) {
+                        var zipCode = rateData.data[0].zipcodes[0].zipcode;
+                        return TaxService.taxRate(zipCode);
+                    })
+                    .then( function handleSecondTax(taxRate) {
+                        console.log('newT', taxRate);
+                        taxRate = Number(taxRate.data.rate.state_rate);
+                        console.log(taxRate);
+                        console.log($.scope.tax);
+
+                        InventoryController.tax = taxRate;
+                        console.log(InventoryController.tax);
+
+                        return taxRate;
+                    });
+            };
             /**
              * passes item to localstorage and inventory in LocalStore service
              * @param  {Object} item new inventory object
@@ -32667,10 +32689,13 @@ $provide.value("$locale", {
      * Tax constructor used to calculate tax rates
      */
     function TaxService($http) {
+
         return {
             getTaxRate: getTaxRate,
             taxRate: taxRate
         };
+
+
 
         /**
          * Calls smartstreet Api to recieve zipcode data based of city and state
@@ -32680,33 +32705,27 @@ $provide.value("$locale", {
         function getTaxRate(location) {
             var state = location.state;
             var city = location.city;
-            $http({
+            return $http({
                 method: 'GET',
                 url: 'https://us-zipcode.api.smartystreets.com/lookup?auth-id=57508333-6a93-b1db-b78b-6d8b26dbdf8c&auth-token=E19FLQP2w93FH0xfiNm6&city='+ city +'&state='+ state +'&zipcode=',
-                dataType: 'json',
-                headers : {
-                    'Content-Type': 'aplication/json'
-                }
-            }).then( function handleSuccess(zipData){
-                console.log(zipData);
-                var zipcode = zipData.data[0].zipcodes[0].zipcode;
-                return taxRate(zipcode);
-            }).then( function handleSecondSuccess(rateData){
-                console.log('rate in chain', rateData);
+                dataType: 'json'
             });
         }
 
 
         /**
          * calls API to recieve tax rate based on state and zipcode
-         * @param  {Strin} state   State used for api query
          * @param  {String} zipcode Zipcode used for api query
          * @return {Promise}         Functions to handle resolved data
          */
         function taxRate(zipcode) {
-            return $http.jsonp('https://taxrates.api.avalara.com:443/postal?country=usa&postal='+ zipcode + '&apikey=RStltT3vmx3opmsghkoIA//8mVThxoGURGwF0pYacxmO20UW66XPK49niaG0hZl689TJIrx5W2TCXhNy2KVEdw==')
-                .then( function handleSuccess(data){
-                console.log('rate in fn', (data));
+            return $http({
+                method: 'GET',
+                url: 'https://api.taxjar.com/v2/rates/' + zipcode,
+                dataType: 'json',
+                headers: {
+                    'Authorization': 'Bearer c9697bba747ae081436339b488940437'
+                }
             });
         }
     }

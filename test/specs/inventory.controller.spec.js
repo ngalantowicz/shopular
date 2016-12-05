@@ -5,12 +5,14 @@
 
     describe('inventory controller', function() {
         var mockLocalStorageService = {};
+        var mockTaxService = {};
         var InventoryController;
 
         beforeEach(module('shop'));
 
         beforeEach(module(function($provide) {
             $provide.value('LocalStorageService', mockLocalStorageService);
+            $provide.value('TaxService', mockTaxService);
         }));
 
         beforeEach(inject(function($controller) {

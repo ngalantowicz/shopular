@@ -4,12 +4,12 @@
     angular.module('shop')
         .controller('InventoryController', InventoryController);
 
-    InventoryController.$inject = ['LocalStorageService'];
+    InventoryController.$inject = ['LocalStorageService', 'TaxService'];
 
         /**
          * Builds controller in shop module for template manipulation
          */
-        function InventoryController(LSservice) {
+        function InventoryController(LSservice, TaxService) {
 
             this.tax = 0.0575;
             this.uk = false;
@@ -18,10 +18,32 @@
             this.formShow = false;
             this.sortBy = 'price';
             this.reverse = false;
-            //this.taxRate = {};
-            //
+            this.taxRate = {};
+
             this.inventory = LSservice.getInventory();
 
+
+            this.newTaxRate = function newTaxRate(location) {
+                if (!location) {
+                    return;
+                }
+            TaxService.getTaxRate(location)
+                    .then( function handleTax(rateData) {
+                        var zipCode = rateData.data[0].zipcodes[0].zipcode;
+                        return TaxService.taxRate(zipCode);
+                    })
+                    .then( function handleSecondTax(taxRate) {
+                        console.log('newT', taxRate);
+                        taxRate = Number(taxRate.data.rate.state_rate);
+                        console.log(taxRate);
+                        console.log($.scope.tax);
+
+                        InventoryController.tax = taxRate;
+                        console.log(InventoryController.tax);
+
+                        return taxRate;
+                    });
+            };
             /**
              * passes item to localstorage and inventory in LocalStore service
              * @param  {Object} item new inventory object

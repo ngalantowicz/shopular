@@ -28,7 +28,7 @@
 
         <main ng-hide='stock.formShow'>
             <!--hiding until ajax works-->
-            <form ng-hide='true' ng-submit='stock.newTaxRate(stock.taxRate)'>
+            <form ng-submit='stock.newTaxRate(stock.taxRate)'>
                 <input type='text' name='city' placeholder='city' ng-model='stock.taxRate.city'>
                 <input type='text' name='state' placeholder='state' ng-model='stock.taxRate.state'>
                 <input type='submit' value='Find TaxRate'>
